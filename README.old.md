@@ -1,2 +1,0 @@
-# detailedUsers
-Testing Task
