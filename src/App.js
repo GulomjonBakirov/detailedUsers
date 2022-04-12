@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Layout } from "antd";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+
+/* Components */
+
+import Main from "./components/Main";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+import MoreInfo from "./components/MoreInfo";
+import Profile from "./components/Profile";
+import Navbar from "./components/Layout/Navbar";
+import SiteHeader from "./components/Layout/SiteHeader";
 
 function App() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [user, setUser] = useState({});
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
+  };
+  console.log(user);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Layout>
+          <Navbar collapsed={collapsed} />
+          <Layout className="site-layout">
+            <SiteHeader collapsed={collapsed} toggle={toggle} />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/user/:id" element={<MoreInfo />} />
+              <Route
+                path="/register"
+                element={<Registration setUser={setUser} />}
+              />
+              <Route path="/login" element={<Login setUser={setUser} />} />
+              <Route path="/profile" element={<Profile user={user} />} />
+            </Routes>
+          </Layout>
+        </Layout>
+      </Router>
     </div>
   );
 }
