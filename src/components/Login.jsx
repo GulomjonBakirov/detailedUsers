@@ -88,9 +88,6 @@ export default function Login({ setUser }) {
           >
             Log in
           </Button>
-          <div style={{ textAlign: "center", marginTop: "10px" }}>
-            Or <Link to="/register">register now!</Link>
-          </div>
         </Form.Item>
       </Form>
     </Content>
